@@ -1,15 +1,534 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My First Website</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PPC Expert | 15 Years of Paid Media Mastery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:   #0A0F1E;
+      --navy2:  #111827;
+      --blue:   #2563EB;
+      --blue-l: #3B82F6;
+      --gold:   #F59E0B;
+      --white:  #F8FAFC;
+      --muted:  #94A3B8;
+      --border: rgba(148,163,184,0.15);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--navy);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.25rem 5%;
+      background: rgba(10,15,30,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800; font-size: 1.2rem; letter-spacing: -0.02em;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .logo span { color: var(--blue-l); }
+
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav ul li a {
+      text-decoration: none; color: var(--muted); font-size: 0.9rem; font-weight: 500;
+      transition: color 0.2s;
+    }
+    nav ul li a:hover { color: var(--white); }
+
+    .nav-cta {
+      background: var(--blue); color: var(--white) !important;
+      padding: 0.5rem 1.2rem; border-radius: 6px;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--blue-l) !important; color: var(--white) !important; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center;
+      padding: 8rem 5% 5rem;
+      position: relative; overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute; top: -30%; left: 50%; transform: translateX(-50%);
+      width: 900px; height: 900px;
+      background: radial-gradient(circle, rgba(37,99,235,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(37,99,235,0.12); border: 1px solid rgba(37,99,235,0.3);
+      color: var(--blue-l); font-size: 0.8rem; font-weight: 600;
+      padding: 0.4rem 1rem; border-radius: 100px; letter-spacing: 0.06em;
+      text-transform: uppercase; margin-bottom: 1.75rem;
+    }
+    .hero-eyebrow::before {
+      content: ''; width: 6px; height: 6px;
+      background: var(--blue-l); border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.7); }
+    }
+
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.6rem, 6vw, 5rem);
+      font-weight: 800; line-height: 1.08; letter-spacing: -0.03em;
+      max-width: 820px; margin-bottom: 1.5rem;
+    }
+    .hero h1 em { font-style: normal; color: var(--blue-l); }
+
+    .hero p {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--muted); max-width: 560px; margin: 0 auto 2.5rem;
+      font-weight: 300; line-height: 1.7;
+    }
+
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.85rem 1.75rem; border-radius: 8px;
+      font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 600;
+      text-decoration: none; cursor: pointer; border: none;
+      transition: all 0.2s;
+    }
+    .btn-primary {
+      background: var(--blue); color: #fff;
+    }
+    .btn-primary:hover { background: var(--blue-l); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(37,99,235,0.35); }
+
+    .btn-outline {
+      background: transparent; color: var(--white);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover { border-color: rgba(148,163,184,0.4); background: rgba(255,255,255,0.04); }
+
+    /* ── STATS TICKER ── */
+    .stats {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 0;
+      margin-top: 5rem; width: 100%; max-width: 900px;
+      border: 1px solid var(--border); border-radius: 16px;
+      background: rgba(255,255,255,0.03); overflow: hidden;
+    }
+    .stat {
+      flex: 1; min-width: 160px;
+      padding: 1.75rem 2rem; text-align: center;
+      border-right: 1px solid var(--border);
+    }
+    .stat:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.4rem; font-weight: 800; line-height: 1;
+      color: var(--white); display: block; margin-bottom: 0.35rem;
+    }
+    .stat-num .accent { color: var(--gold); }
+    .stat-label { font-size: 0.8rem; color: var(--muted); font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
+
+    /* ── LOGOS STRIP ── */
+    .platforms {
+      padding: 3.5rem 5%;
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+    }
+    .platforms p { font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; margin-bottom: 2rem; }
+    .platform-list { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 2.5rem; }
+    .platform-badge {
+      display: flex; align-items: center; gap: 0.6rem;
+      color: var(--muted); font-weight: 600; font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+    .platform-badge:hover { color: var(--white); }
+    .platform-badge svg { width: 22px; height: 22px; }
+
+    /* ── SECTION SHARED ── */
+    section { padding: 6rem 5%; }
+    .section-tag {
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--blue-l);
+      margin-bottom: 0.75rem; display: block;
+    }
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.75rem);
+      font-weight: 800; letter-spacing: -0.025em; line-height: 1.15;
+      max-width: 560px; margin-bottom: 1rem;
+    }
+    .section-sub { color: var(--muted); max-width: 500px; line-height: 1.7; }
+
+    /* ── SERVICES ── */
+    #services { background: var(--navy2); }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem; margin-top: 3.5rem;
+    }
+    .service-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border); border-radius: 14px;
+      padding: 2rem;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+    .service-card:hover {
+      border-color: rgba(37,99,235,0.45);
+      transform: translateY(-3px);
+    }
+    .service-icon {
+      width: 46px; height: 46px; border-radius: 10px;
+      background: rgba(37,99,235,0.14); display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.25rem; font-size: 1.3rem;
+    }
+    .service-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.1rem; font-weight: 700; margin-bottom: 0.6rem;
+    }
+    .service-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.65; }
+
+    /* ── ABOUT ── */
+    #about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: center;
+    }
+    .about-visual {
+      position: relative;
+    }
+    .about-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border); border-radius: 18px;
+      padding: 2.5rem; position: relative; overflow: hidden;
+    }
+    .about-card::after {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--blue), var(--blue-l));
+    }
+    .about-card-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.5rem; font-weight: 800; margin-bottom: 0.25rem;
+    }
+    .about-card-title { color: var(--blue-l); font-size: 0.9rem; font-weight: 600; margin-bottom: 1.5rem; }
+    .about-badges { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .badge {
+      background: rgba(37,99,235,0.12); border: 1px solid rgba(37,99,235,0.25);
+      color: var(--blue-l); font-size: 0.75rem; font-weight: 600;
+      padding: 0.3rem 0.75rem; border-radius: 100px;
+    }
+    .about-text { font-size: 1rem; color: var(--muted); line-height: 1.8; margin-bottom: 1.25rem; }
+    .about-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; margin-top: 1.5rem; }
+    .about-list li {
+      display: flex; align-items: flex-start; gap: 0.6rem;
+      font-size: 0.9rem; color: var(--muted);
+    }
+    .about-list li::before { content: '✓'; color: var(--gold); font-weight: 700; margin-top: 0.05rem; flex-shrink: 0; }
+
+    /* ── PROCESS ── */
+    #process { background: var(--navy2); }
+    .process-steps {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0; margin-top: 3.5rem; position: relative;
+      border: 1px solid var(--border); border-radius: 14px; overflow: hidden;
+    }
+    .step {
+      padding: 2rem 1.75rem;
+      border-right: 1px solid var(--border);
+      position: relative;
+    }
+    .step:last-child { border-right: none; }
+    .step-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 2.5rem; font-weight: 800;
+      color: rgba(37,99,235,0.18); line-height: 1;
+      margin-bottom: 1rem;
+    }
+    .step h3 { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .step p { font-size: 0.85rem; color: var(--muted); line-height: 1.65; }
+
+    /* ── CTA ── */
+    #contact {
+      text-align: center;
+      background: radial-gradient(ellipse at center, rgba(37,99,235,0.12) 0%, transparent 70%);
+      border-top: 1px solid var(--border);
+    }
+    #contact .section-title { max-width: 100%; margin: 0 auto 1rem; }
+    #contact .section-sub { margin: 0 auto 2.5rem; }
+    .contact-form {
+      display: flex; gap: 0.75rem; max-width: 480px;
+      margin: 0 auto; flex-wrap: wrap; justify-content: center;
+    }
+    .contact-form input {
+      flex: 1; min-width: 200px;
+      background: rgba(255,255,255,0.06); border: 1px solid var(--border);
+      border-radius: 8px; padding: 0.85rem 1.25rem;
+      color: var(--white); font-family: 'Inter', sans-serif; font-size: 0.95rem;
+      outline: none; transition: border-color 0.2s;
+    }
+    .contact-form input::placeholder { color: var(--muted); }
+    .contact-form input:focus { border-color: var(--blue-l); }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2rem 5%; border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    footer p { font-size: 0.85rem; color: var(--muted); }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { font-size: 0.85rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--white); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav ul { display: none; }
+      #about { grid-template-columns: 1fr; gap: 2.5rem; }
+      .stat { min-width: 140px; padding: 1.25rem; }
+      .step { border-right: none; border-bottom: 1px solid var(--border); }
+      .step:last-child { border-bottom: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { animation: none !important; transition: none !important; }
+    }
+  </style>
 </head>
 <body>
-    <h1>Welcome to My Website</h1>
 
-    <p>This website is hosted on GitHub Pages.</p>
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">PPC<span>Pro</span></a>
+  <ul>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#contact" class="nav-cta">Let's Talk</a></li>
+  </ul>
+</nav>
 
-    <button onclick="alert('Button clicked')">
-        Contact Us
-    </button>
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-eyebrow">Available for new clients</div>
+  <h1>Paid Media that <em>actually</em><br>drives revenue</h1>
+  <p>15 years running profitable campaigns across Google, Meta & LinkedIn — for brands that are serious about growth.</p>
+  <div class="hero-actions">
+    <a href="#contact" class="btn btn-primary">Book a Free Audit →</a>
+    <a href="#services" class="btn btn-outline">See What I Do</a>
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-num" data-target="15"><span class="accent">15</span>+</span>
+      <span class="stat-label">Years Experience</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num"><span class="accent" data-target="50">$50</span>M+</span>
+      <span class="stat-label">Ad Spend Managed</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num"><span class="accent" data-target="4">4.8</span>x</span>
+      <span class="stat-label">Avg. ROAS Delivered</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num"><span class="accent" data-target="200">200</span>+</span>
+      <span class="stat-label">Campaigns Launched</span>
+    </div>
+  </div>
+</header>
+
+<!-- PLATFORMS -->
+<div class="platforms">
+  <p>Certified & experienced across</p>
+  <div class="platform-list">
+    <div class="platform-badge">
+      <!-- Google Ads -->
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" fill="#4285F4"/>
+        <path d="M7 12l3 3 7-7" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Google Ads
+    </div>
+    <div class="platform-badge">
+      <!-- Meta -->
+      <svg viewBox="0 0 24 24" fill="#1877F2">
+        <path d="M24 12.073C24 5.41 18.627 0 12 0S0 5.41 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.236 2.686.236v2.97h-1.514c-1.491 0-1.956.93-1.956 1.887v2.267h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/>
+      </svg>
+      Meta Ads
+    </div>
+    <div class="platform-badge">
+      <!-- LinkedIn -->
+      <svg viewBox="0 0 24 24" fill="#0A66C2">
+        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+      </svg>
+      LinkedIn Ads
+    </div>
+    <div class="platform-badge">
+      <!-- GA4 -->
+      <svg viewBox="0 0 24 24" fill="none">
+        <rect width="24" height="24" rx="4" fill="#E37400"/>
+        <path d="M6 16V11M12 16V8M18 16V13" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+      GA4
+    </div>
+    <div class="platform-badge">
+      <!-- CRO -->
+      <svg viewBox="0 0 24 24" fill="none">
+        <path d="M3 17l4-4 4 4 4-6 4 2" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="19" cy="13" r="2" stroke="#F59E0B" stroke-width="2"/>
+      </svg>
+      CRO
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div>
+    <span class="section-tag">What I offer</span>
+    <h2 class="section-title">Full-funnel paid media expertise</h2>
+    <p class="section-sub">From strategy to execution to optimisation — I handle every layer of your paid acquisition.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">🎯</div>
+      <h3>Google Ads Management</h3>
+      <p>Search, Shopping, Performance Max, Display & YouTube campaigns built for efficiency. Keyword strategy, match types, bid management — all handled with 15 years of hands-on precision.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📱</div>
+      <h3>Meta Ads (Facebook & Instagram)</h3>
+      <p>Audience architecture, creative testing frameworks, and funnel-based campaigns that scale. From prospecting cold audiences to retargeting high-intent users.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">💼</div>
+      <h3>LinkedIn Ads</h3>
+      <p>B2B lead generation through Sponsored Content, Message Ads, and Lead Gen Forms. Precise targeting by job title, company size, and seniority for qualified pipeline.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📊</div>
+      <h3>GA4 Setup & Analytics</h3>
+      <p>Proper conversion tracking, event configuration, and GA4 migration. You'll finally understand which campaigns actually drive revenue — not just traffic.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🔬</div>
+      <h3>Conversion Rate Optimisation</h3>
+      <p>Landing page audits, A/B testing strategy, and UX recommendations that turn more of your paid clicks into paying customers. Lower CPA without cutting spend.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🔍</div>
+      <h3>PPC Audits</h3>
+      <p>A no-fluff deep dive into your existing accounts. I'll find the waste, flag the wins, and hand you a clear roadmap — whether you hire me or not.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-visual">
+    <div class="about-card">
+      <div class="about-card-name">Your Name</div>
+      <div class="about-card-title">Senior PPC Consultant & Paid Media Strategist</div>
+      <div class="about-badges">
+        <span class="badge">Google Certified</span>
+        <span class="badge">Meta Blueprint</span>
+        <span class="badge">15 Yrs Experience</span>
+        <span class="badge">GA4 Specialist</span>
+      </div>
+    </div>
+  </div>
+  <div class="about-content">
+    <span class="section-tag">About me</span>
+    <h2 class="section-title">I've been doing this before "performance marketing" was even a phrase</h2>
+    <p class="about-text">
+      I started running paid campaigns in the early days of Google AdWords — when broad match meant something very different. Since then I've managed everything from £500/month local budgets to multi-million dollar international accounts.
+    </p>
+    <p class="about-text">
+      I work with e-commerce brands, SaaS companies, and B2B businesses who are tired of agencies that over-promise and under-deliver. No juniors. No account managers. Just me, in your accounts, every day.
+    </p>
+    <ul class="about-list">
+      <li>Managed £50M+ in total ad spend across platforms</li>
+      <li>Reduced average CPAs by 35–60% through structured testing</li>
+      <li>Set up GA4 tracking for 40+ brands post-UA sunset</li>
+      <li>CRO testing that lifted landing page CVR by up to 80%</li>
+      <li>Available for retained monthly work or one-off projects</li>
+    </ul>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <span class="section-tag">How it works</span>
+  <h2 class="section-title">From first call to first results</h2>
+  <div class="process-steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <h3>Free Audit Call</h3>
+      <p>We review your current accounts and I tell you honestly what's working, what isn't, and what the opportunity looks like.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <h3>Strategy & Roadmap</h3>
+      <p>I build a tailored plan — channels, budgets, structure, and quick wins — before any money gets touched.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <h3>Launch & Optimise</h3>
+      <p>Campaigns go live with rigorous tracking in place. Weekly optimisations, monthly reporting, no black boxes.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <h3>Scale What Works</h3>
+      <p>Once we know what drives profit, we scale it. Budget decisions based on data, not gut feel or commission targets.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="contact">
+  <span class="section-tag">Get in touch</span>
+  <h2 class="section-title">Ready to stop guessing and start growing?</h2>
+  <p class="section-sub">Drop your email and I'll get back to you within 24 hours with a time to talk.</p>
+  <div class="contact-form">
+    <input type="email" placeholder="your@email.com" />
+    <a href="#" class="btn btn-primary">Get Free Audit</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 Your Name · PPC Consultant</p>
+  <div class="footer-links">
+    <a href="mailto:hello@yourdomain.com">Email</a>
+    <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a>
+    <a href="#services">Services</a>
+  </div>
+</footer>
+
 </body>
 </html>
